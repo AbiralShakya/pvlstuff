@@ -1,0 +1,78 @@
+07.23.2025
+
+ego blur
+    visualize difference between orig image & blurred image
+
+experiment on:
+    side faces
+    back faces
+
+if identifiable data --> want to blur 
+
+
+--> can we avoid cases that we can't make out the LP letters or faces in the first place ? 
+    might be fine out of box
+
+in future
+    write script that auto kicks off slurm jobs 
+        one for each video
+    
+rn:
+    collecting data
+    put this on neuronic/ ionic
+    kick off slurm jobs from there
+
+    mock folder structure
+
+    programatically find structure of folder names 
+        that slurm script will run blurring pipeline
+    
+faces:
+    how much of face is visible 
+        crop, weird orientations that you would not expect
+    
+    maybe the blur is weak when partically cutoff
+        look into further
+
+when given many input views of scence 
+    can clearly see some parts of the scene but not all
+        idea is when doing 3d reconstruction  --> want to use as much of given info as possible when you know you have into
+        for parts of 3d scence you don't know you have , thats where you use gen ai 
+            use everything else for conditioning 
+        rn: erich & sreemanti working on masking of what we don't know 
+
+    given view 1 and view2 as known info 
+        lets assume there is a modle that telsl you what the pixels look like for the part you observed, then we want to use diffusion for the inpaint
+    
+do some background on SoTA diffusion
+
+take any random image 
+    crop out square , fill with random noise or black pixels, idealy not using color for a conditioning of what should be there (should be random stoachstic noise) 
+
+    see if you can generate image where that goal is generaed with something plausible but ALL other pixel values are the same
+
+    slap on any mask, hand erase or make it a square or now. 
+
+convenient if query existing model
+    (mdoels aren't trained for specific task of holding everything else constant) 
+    can't fine tune without data & mask
+
+project that requires blurring stuff is already submitted
+    reason: did a first version of data collection 
+        now want to expand (more faces and cars)
+
+3d gaussian splatting 
+nerf
+diffusion
+
+novel view synthesis methods 
+    give 5 or 10 views of science, now camera in different location, tell me what scence looks like, 2d output 
+
+we care more about accuracy of 3d geometry
+
+2d reconstruction can be perfect in NVS, but 3d structure / geometry is not good from these methods
+    trad methods: slam, optical flow methods, etc (more constrained methods)
+
+pvl cares more about 3d accuracy
+
+not very convinced that diffusion models have good inherent 3d understanding, mostly good for 2d 
